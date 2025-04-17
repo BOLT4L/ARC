@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searchable and Filterable Table</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 16px 24px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #e6e6e6;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-container input {
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    @media (max-width: 767px) {
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="search-container">
+      <div><input type="text" id="search-input" placeholder="Search..."><button style="height: 35px;border-radius: 5px;">Search</button></div>
+      <div>Today<input type="radio" name="today"></div>
+      <select id="filter-select">
+        <option value="">All</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Venereology">Venereology</option>
+        <option value="Leprology">Leprology</option>
+      </select>
+    </div>
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Pid</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Sex</th>
+          <th>Time</th>
+          <th>Date</th>
+          <th>Doctor</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>21</td>
+          <td>John Doe</td>
+          <td>john.doe@example.com</td>
+          <td>(123) 456-7890</td>
+          <td>123 Main St, Anytown USA</td>
+          <td>Male</td>
+          <td>11:00 PM - 2:00 AM</td>
+          <td>24/08/2024</td>
+          <td>Dr Marcus</td>
+          <td>Dermatology</td>
+        </tr>
+        <tr>
+            <td>21</td>
+          <td>Jane Smith</td>
+          <td>jane.smith@example.com</td>
+          <td>(987) 654-3210</td>
+          <td>456 Oak Rd, Othertown USA</td>
+          <td>Male</td>
+          <td>11:00 PM - 2:00 AM</td>
+          <td>24/08/2024</td>
+          <td>Dr Marcus</td>
+          <td>Dermatology</td>
+        </tr>
+        <tr>
+            <td>21</td>
+          <td>Bob Johnson</td>
+          <td>bob.johnson@example.com</td>
+          <td>(555) 555-5555</td>
+          <td>789 Elm St, Somewhere USA</td>
+          <td>Male</td>
+          <td>11:00 PM - 2:00 AM</td>
+          <td>24/08/2024</td>
+          <td>Dr Marcus</td>
+          <td>Dermatology</td>
+        </tr>
+        <tr>
+            <td>21</td>
+          <td>Sarah Lee</td>
+          <td>sarah.lee@example.com</td>
+          <td>(111) 222-3333</td>
+          <td>321 Pine Ln, Elsewhere USA</td>
+          <td>Female</td>
+          <td>11:00 PM - 2:00 AM</td>
+          <td>24/08/2024</td>
+          <td>Dr Marcus</td>
+          <td>Dermatology</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // JavaScript code
+    const searchInput = document.getElementById('search-input');
+    const filterSelect = document.getElementById('filter-select');
+    const dataTable = document.getElementById('data-table');
+    const tableRows = dataTable.getElementsByTagName('tr');
+
+    searchInput.addEventListener('input', filterTable);
+    filterSelect.addEventListener('change', filterTable);
+
+    function filterTable() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filterBy = filterSelect.value;
+
+      for (let i = 1; i < tableRows.length; i++) {
+        const row = tableRows[i];
+        const cells = row.getElementsByTagName('td');
+        let shouldShow = false;
+
+        for (let j = 0; j < cells.length; j++) {
+          const cell = cells[j];
+          const cellText = cell.textContent.toLowerCase();
+
+          if (filterBy === '' || cells[j].cellIndex === ['Name', 'Email', 'Phone', 'Address'].indexOf(filterBy)) {
+            if (cellText.includes(searchTerm)) {
+              shouldShow = true;
+              break;
+            }
+          }
+        }
+
+        row.style.display = shouldShow ? 'table-row' : 'none';
+      }
+    }
+  </script>
+</body>
+</html>

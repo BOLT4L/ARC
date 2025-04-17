@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Interface for Appointment</title>
+  <style>
+    /* Reset some default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      
+    }
+ 
+    /* Header styles */
+    header {
+      background-color: #75d0e3;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      height: 75px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    nav ul li a:hover {
+      color: #ccc;
+    }
+
+    /* Main content styles */
+    main {
+      padding-top: 80px; /* Adjust this value to match the header height */
+      padding-bottom: 40px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .logo {
+        margin-bottom: 10px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+      }
+    }
+    
+.billboard-container {
+  position: relative;
+  height: 650px;
+  overflow: hidden;
+}
+
+.billboard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.billboard-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  width: 80%;
+  max-width: 800px;
+}
+
+.billboard-content h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.billboard-content p {
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .billboard-container {
+    height: 300px;
+  }
+
+  .billboard-content h1 {
+    font-size: 32px;
+  }
+
+  .billboard-content p {
+    font-size: 18px;
+  }
+}
+.h{
+  position: relative;
+  top: 85%;
+  margin-left: 63%;
+  font-size: 30px;
+  transform: translate(-50%, -50%);
+  
+}
+    
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+  
+  padding: 4px;
+  margin-top : 40px;
+}
+
+.grid-item {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-image {
+  padding: 10%;
+  width: 75%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.grid-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  padding: 10%;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+  }
+}
+.footer {
+  background-color: #75d0e3;
+  color: #fff;
+  padding: 40px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1;
+  margin-right: 40px;
+}
+
+.footer-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.footer-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #ccc;
+}
+
+.footer-bottom {
+  border-top: 1px solid #555;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #080808;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-section {
+    margin-right: 0;
+    margin-bottom: 40px;
+  }
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  justify-content: center;
+  padding: 40px;
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.card-link {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.card-link:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .card-image {
+    height: 150px;
+  }
+}
+
+
+
+.slider {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.popup {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .popup-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 30%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .popup-content {
+        width: 80%;
+        margin: 30% auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Afro Deramtology clinic</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#service">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="billboard-container">
+    {% load static %}
+    <img src="{% static 'img/clinic.jpg'%}" alt="Billboard Image" class="billboard-image">
+    <div class="billboard-content">
+      <h1>Welcome to Our Website</h1>
+      <p>Discover our products and services today!</p>
+      <p></p>
+     </div>
+  </div>
+  
+  <main>
+    <section class="service" id="service">
+        <h2 class="h">Our Services</h2>
+    <div class="card-grid">
+        <div class="card">
+          <img src="{% static 'img/derma.jpg'%}" alt="Card Image 1" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Dermatology</h3>
+            <p class="card-text">
+                Our team of board-certified dermatologists, physician assistants, and licensed estheticians work collaboratively to deliver personalized treatments and help our patients achieve optimal skin health.
+             </p>
+            <a href="#" class="card-link" id="myLink" data-value="Dermatology">Schedule Appointment</a>
+          </div>
+        </div>
+        <div class="card">
+          <img src="{% static 'img/venre.jpg'%}" style="object-fit:contain;" alt="Card Image 2" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Venereology</h3>
+            <p class="card-text">
+                we provide comprehensive care and treatment for venereological conditions. Our team of experienced venereologists, dermatologists, and infectious disease experts are dedicated to helping patients manage their sexual health with compassion and discretion.
+            </p>
+            <a href="#" class="card-link" id="myLink2" data-value="venereology">Schedule Appointment</a>
+          </div>
+        </div>
+        <div class="card">
+          <img src="{% static 'img/lepro.jpg'%}" style="object-fit:contain;"alt="Card Image 3" class="card-image">
+          <div class="card-content">
+            <h3 class="card-title">Leprology</h3>
+            <p class="card-text">
+                Offers medical and surgical services for all the complications associated with leprosy.
+            </p>
+            <a href="#" class="card-link" id="myLink3"data-value="leprology">Schedule Appointment</a>
+          </div>
+          </div>
+    </section>
+    
+    <div id="myPopup" class="popup">
+        <div class="popup-content">
+
+          <span class="close">&times;</span>
+          <div id="warning-message" style="color: red;" class="warning-message"></div>
+          <h2>Schedule an appointment</h2>
+          
+          <div class="form-group">
+            <label for="doctor">Choose Doctor:</label>
+            <select id="doctor" name="doctor" required>
+              <option value="">Select Doctor</option>
+              <!-- Populate options dynamically based on available doctors -->
+            </select>
+          </div>
+        
+          <div class="form-group">
+            <label for="appointment-date">Choose Date:</label>
+            <input type="date" id="appointment-date" name="appointment-date" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="time">Choose Doctor:</label>
+            <select id="time" name="time" required>
+              <option value="">Select Time</option>
+              <!-- Populate options dynamically based on available doctors -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="">Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+               
+              </select>
+              </div>
+        
+          <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+        
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+        
+          <button type="submit" class="submit-btn" id="popup-value">Book Appointment</button>
+    
+        </div>
+      </div>
+    <section class="about" id="about">
+        <div class="grid-container">
+            <div class="grid-item">
+              <img src="{% static 'img/clinic.jpg'%}" alt="Image" class="grid-image">
+            </div>
+            <div class="grid-item">
+                
+              <p class="grid-text">
+                <h2>Our Vision</h2>
+                Our vision is to provide comprehensive and compassionate dermatological
+                 care that addresses a wide range of skin, hair, and nail conditions,
+                  including those related to venereology and leprology. We are dedicated
+                   to staying at the forefront of advancements in these specialized fields,
+                    leveraging the latest research and technologies to deliver personalized 
+                    treatment plans tailored to each individual's unique needs.
+              </p>
+            </div>
+          </div>
+    </section>
+    <section class="about" id="about">
+        <div class="grid-container">
+            
+            <div class="grid-item">
+                <h2 style="margin-left: 40%;">About Us</h2>
+              <p class="grid-text">
+                
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut
+                perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                inventore veritatis et quasi architecto beatae vitae dicta sunt
+                explicabo.
+              </p>
+            </div>
+            <div class="grid-item">
+                <img src="{% static 'img/clinic.jpg'%}" alt="Image" class="grid-image">
+              </div>
+          </div>
+    </section>
+        <div class="slider">
+            <div class="slide">
+              <img src="{% static 'img/clinic.jpg'%}" alt="Image 1">
+            </div>
+            <div class="slide">
+              <img src="{% static 'img/clinic1.jpg'%}" alt="Image 2">
+            </div>
+            <div class="slide">
+              <img src="{% static 'img/clinic2.jpg'%}" alt="Image 3">
+            </div>
+            <!-- Add more slides as needed -->
+          </div>
+        
+          <script>
+            const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+
+function showSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (n + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+}
+
+function nextSlide() {
+  showSlide(currentSlide + 1);
+}
+
+let intervalId = setInterval(nextSlide, 3000);
+
+// Pause the slider on hover
+document.querySelector('.slider').addEventListener('mouseenter', () => {
+  clearInterval(intervalId);
+});
+
+document.querySelector('.slider').addEventListener('mouseleave', () => {
+  intervalId = setInterval(nextSlide, 3000);
+});
+var popup = document.getElementById("myPopup");
+var links = document.querySelectorAll(".card-link");
+var span = document.getElementsByClassName("close")[0];
+var popupValue = document.getElementById("popup-value");
+links.forEach(function(link) {
+      link.onclick = function(event) {
+        event.preventDefault();
+        var value = this.getAttribute("data-value");
+        popupValue.textContent = "The value passed is: " + value;
+        popup.style.display = "block";
+      }
+    });
+
+
+    span.onclick = function() {
+      popup.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == popup) {
+        popup.style.display = "none";
+      }
+    }
+  
+    // Get the date input field
+var dateInput = document.getElementById('appointment-date');
+
+// Define the unavailable weekdays (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+var unavailableWeekdays = [0, 3]; // Sunday and Saturday
+
+
+var warningMessage = document.getElementById('warning-message');
+
+// Add event listener to the date input field
+dateInput.addEventListener('input', function() {
+  // Get the selected date
+  var selectedDate = new Date(this.value);
+
+  // Get the day of the week of the selected date (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  var selectedWeekday = selectedDate.getDay();
+
+  // Check if the selected weekday is in the unavailable weekdays array
+  if (unavailableWeekdays.includes(selectedWeekday)) {
+    // If the selected weekday is unavailable, clear the input field
+    warningMessage.textContent = 'Sorry, appointments are not available on this day.';
+    warningMessage.style.display = 'block';
+  }
+  else {
+    // If the selected weekday is available, hide the warning modal
+    warningMessage.style.display = 'none';
+  }
+});
+ </script>
+    
+  </main>
+  <footer class="footer" id="contact">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-title">About Us</h3>
+        <p class="footer-text">
+          We are a company that provides high-quality products and services to our
+          customers.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#service">Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <p class="footer-text">
+          A.A, Ethiopia<br />
+          Phone: (123) 456-7890<br />
+          Email: @example.com
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; 2023 JOBS/E.W. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
